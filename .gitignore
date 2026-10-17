@@ -6,3 +6,5 @@
 *.pyo
 *.pyd
 env
+.env
+.stockEnv

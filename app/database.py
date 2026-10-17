@@ -1,11 +1,13 @@
 from sqlalchemy import create_engine
 from sqlalchemy.orm import declarative_base, sessionmaker
+import os
+from dotenv import load_dotenv
 
-user = 'root'
-password = "Alakesh%4018"
-host = "localhost"
-port = 3306
-database = "stock_mgmt_db"
+user = os.getenv(USER)
+password = os.getenv(PASSWORD)
+host = os.getenv(HOST)
+port = os.getenv(PORT)
+database = os.getenv(DATABASE)
 
 engine = create_engine(
     f"mysql+pymysql://{user}:{password}@{host}:{port}/{database}"
