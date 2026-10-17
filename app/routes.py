@@ -28,7 +28,7 @@ def add_product(product:schemas.ProductSchema,db:Session=Depends(get_db)):# noqa
     return new_product
 
 @router.get("/products",status_code=200,response_model=list[schemas.ProductSchemaFull])
-def get_products(product_name: str | None = None,db: Session = Depends(get_db)):  # noqa: B008)
+def get_products(product_name: str | None = None,db: Session = Depends(get_db)):   # noqa: B008
     if product_name:
         return crud.get_product_by_name(product_name, db)
     return crud.get_product(db)
@@ -36,12 +36,12 @@ def get_products(product_name: str | None = None,db: Session = Depends(get_db)):
 
 
 @router.get("/products/{p_id}",status_code=200,response_model=schemas.ProductSchemaFull)
-def get_product(p_id :int,db:Session= Depends(get_db)):
+def get_product(p_id :int,db:Session= Depends(get_db)):# noqa: B008
     return crud.get_product(p_id,db)
 
 
 @router.patch("/products/{p_id}",status_code=200,response_model=schemas.ProductSchemaFull)
-def update_product(product:schemas.ProductSchemaUpdate, p_id:int, db:Session= Depends(get_db)):
+def update_product(product:schemas.ProductSchemaUpdate, p_id:int, db:Session= Depends(get_db)):# noqa: B008
     updated_product=crud.update_product(p_id,product,db)
     if updated_product is None:
         return HTTPException(404,"Product Not Found ")
