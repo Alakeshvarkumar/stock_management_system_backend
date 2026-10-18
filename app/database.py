@@ -3,11 +3,11 @@ from sqlalchemy.orm import declarative_base, sessionmaker
 import os
 from dotenv import load_dotenv
 
-user = os.getenv(USER)
-password = os.getenv(PASSWORD)
-host = os.getenv(HOST)
-port = os.getenv(PORT)
-database = os.getenv(DATABASE)
+user = "root"
+password = "Babu%400309"
+host =  "localhost"
+port = 3306
+database = "hd_supply_db"
 
 engine = create_engine(
     f"mysql+pymysql://{user}:{password}@{host}:{port}/{database}"
