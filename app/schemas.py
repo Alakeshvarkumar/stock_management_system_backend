@@ -25,6 +25,8 @@ class RegisterUserResponse(BaseModel):
 
     model_config = ConfigDict(from_attributes=True)
 
+class UserSchema(RegisterUserResponse):
+    pass
 
 class AllCategories(BaseModel):
     c_id: int
@@ -32,7 +34,7 @@ class AllCategories(BaseModel):
 
     model_config = ConfigDict(from_attributes=True)
 
-
+#----------product schemas----------------
 class ProductSchema(BaseModel):
     p_name: str = Field(min_length=1, max_length=100)
     quantity: int = Field(default=0, ge=0)
@@ -55,3 +57,19 @@ class ProductSchemaUpdate(BaseModel):
     price: Decimal | None = Field(default=None, ge=0)
     min_stock_level: int | None = Field(default=None, ge=0)
     c_id: int | None = None
+
+#----stock schemas-----------------
+class StockTransactionRequest(BaseModel):
+    p_id:int
+    u_id:int
+    t_typt:Literal["IN","OUT"]
+    quantity:int
+#--------jwt----------------
+class Token(BaseModel):
+    access_token: str
+    token_type: str
+
+
+class TokenData(BaseModel):
+    username: str 
+    role:str

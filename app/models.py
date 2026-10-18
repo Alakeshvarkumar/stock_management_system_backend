@@ -45,7 +45,7 @@ class Product(Base):
         onupdate=text("CURRENT_TIMESTAMP"),
     )
 
-    minimal_stock_level = Column(Integer, nullable=False, default=0)
+    min_stock_level = Column("minimal_stock_level",Integer, nullable=False, default=0)
     c_id = Column(Integer, ForeignKey("category.c_id"), nullable=False)
 
 
