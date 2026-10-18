@@ -1,16 +1,25 @@
-import React, { useState, useEffect } from 'react';
-import axios from 'axios';
+
+import { useState } from "react";
+import axios from "axios";
+
+const API_BASE = "http://localhost:8000";
+
 export const AddCategory = () => {
   const [Name, setName] = useState("");
 
-  function handleSubmit(e) {
+  async function handleSubmit(e) {
     e.preventDefault();
-    console.log(Name);
-    setName("");
-  }
-  function handleChange(){
-    setName(e.target.value)
-    console.log(Name)
+
+    try {
+      const res = await axios.post(`${API_BASE}/categories`, {
+        c_name: Name,
+      });
+
+      console.log(res.data);
+      setName("");
+    } catch (error) {
+      console.error(error.response?.data || error.message);
+    }
   }
 
   return (

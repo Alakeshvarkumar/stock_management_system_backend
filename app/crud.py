@@ -1,4 +1,4 @@
-import app.schemas
+from app import schemas
 from sqlalchemy import select
 from sqlalchemy.orm import Session
 
