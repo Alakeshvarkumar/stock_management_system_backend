@@ -1,4 +1,3 @@
-
 from sqlalchemy import select
 from sqlalchemy.orm import Session
 
@@ -53,7 +52,7 @@ def get_product_by_name(product_name:str,db:Session):
     return db.scalars(stmt).all() 
 
 def update_product(p_id:int,product:schemas.ProductSchemaUpdate, db:Session)->models.Product| None:
-    db_product= get_product(p_id,db)
+    db_product= get_product(product_id=p_id,db=db)
 
     if db_product is None:
         return

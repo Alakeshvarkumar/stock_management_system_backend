@@ -8,7 +8,7 @@ from sqlalchemy import (
     String,
     text,
 )
-
+from sqlalchemy.orm import relationship
 from .database import Base
 
 
@@ -47,6 +47,7 @@ class Product(Base):
 
     min_stock_level = Column("minimal_stock_level",Integer, nullable=False, default=0)
     c_id = Column(Integer, ForeignKey("category.c_id"), nullable=False)
+    category = relationship("Category")
 
 
 class StockTransaction(Base):
