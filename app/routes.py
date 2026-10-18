@@ -31,13 +31,13 @@ def add_product(product:schemas.ProductSchema,db:Session=Depends(get_db)):# noqa
 def get_products(product_name: str | None = None,db: Session = Depends(get_db)):   # noqa: B008
     if product_name:
         return crud.get_product_by_name(product_name, db)
-    return crud.get_product(db)
+    return crud.get_product(db=db)
 
 
 
 @router.get("/products/{p_id}",status_code=200,response_model=schemas.ProductSchemaFull)
 def get_product(p_id :int,db:Session= Depends(get_db)):# noqa: B008
-    return crud.get_product(p_id,db)
+    return crud.get_product(product_id=p_id,db=db)
 
 
 @router.patch("/products/{p_id}",status_code=200,response_model=schemas.ProductSchemaFull)

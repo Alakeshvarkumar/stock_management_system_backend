@@ -45,7 +45,7 @@ class ProductSchemaFull(ProductSchema):
     p_id: int
     created_at: datetime
     modified_at: datetime
-
+    category : AllCategories
     model_config = ConfigDict(from_attributes=True)
 
 

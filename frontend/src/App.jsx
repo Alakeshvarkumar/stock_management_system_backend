@@ -1,5 +1,6 @@
 import { useState } from 'react'
 import { Home } from './Pages/Home/Home'
+import { Products } from './Pages/Products/Products'
 import { Navbar } from './components/Navbar/Navbar'
 import { LoginPage } from './Pages/Login/LoginPage'
 import { Routes, Route,Navigate } from 'react-router-dom'
@@ -14,6 +15,7 @@ function App() {
         <Route path="/" element={<Home />} />
         <Route path='/nav' element={<Navbar/>} />
         <Route path='/login' element ={<LoginPage/>}/>
+        <Route path='/products' element ={<Products />}/>
       </Routes>
     </div>
   )

@@ -32,7 +32,7 @@ def add_product(product:schemas.ProductSchema, db:Session):
     db.refresh(product)
     return product
 
-def get_product(product_id:int|None,db:Session):
+def get_product(db:Session,product_id:int|None=None):
     if product_id:
         stmt= select(models.Product).where(models.Product.p_id==product_id)
         return db.scalars(stmt).first()
@@ -45,7 +45,7 @@ def get_product_by_name(product_name:str,db:Session):
     return db.scalars(stmt).all() 
 
 def update_product(p_id:int,product:schemas.ProductSchemaUpdate, db:Session)->models.Product| None:
-    db_product= get_product(p_id,db)
+    db_product= get_product(product_id=p_id,db=db)
 
     if db_product is None:
         return
