@@ -5,8 +5,10 @@ from app import crud, schemas
 
 from .database import get_db
 
+
 router = APIRouter()
 
+#--------------categories routes-----------
 @router.post("/categories",status_code=201)
 def create_category(data:schemas.CategoryCreate , db: Session = Depends(get_db)):  # noqa: B008
     new_category=crud.add_category(db,data.c_name)
@@ -22,24 +24,27 @@ def create_category(data:schemas.CategoryCreate , db: Session = Depends(get_db))
 def get_all_categories(db:Session=Depends(get_db)):# noqa: B008
     return crud.get_all_categories(db)
 
+
+#------------add products ----------------
 @router.post("/products",status_code=201,response_model=schemas.ProductSchemaFull)
 def add_product(product:schemas.ProductSchema,db:Session=Depends(get_db)):# noqa: B008
     new_product = crud.add_product(product,db)
     return new_product
 
+
+#-----------PRODUCTS FETCH 
 @router.get("/products",status_code=200,response_model=list[schemas.ProductSchemaFull])
 def get_products(product_name: str | None = None,db: Session = Depends(get_db)):   # noqa: B008
     if product_name:
         return crud.get_product_by_name(product_name, db)
     return crud.get_product(db)
 
-
-
 @router.get("/products/{p_id}",status_code=200,response_model=schemas.ProductSchemaFull)
 def get_product(p_id :int,db:Session= Depends(get_db)):# noqa: B008
     return crud.get_product(p_id,db)
 
 
+#----------products update-------------
 @router.patch("/products/{p_id}",status_code=200,response_model=schemas.ProductSchemaFull)
 def update_product(product:schemas.ProductSchemaUpdate, p_id:int, db:Session= Depends(get_db)):# noqa: B008
     updated_product=crud.update_product(p_id,product,db)
