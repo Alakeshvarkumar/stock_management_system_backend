@@ -1,7 +1,7 @@
 
 import { useState, useEffect } from "react";
 import axios from "axios";
-
+import "./Products.css"
 const API_BASE = "http://localhost:8000";
 
 export const Products = () => {
@@ -159,61 +159,77 @@ export const Products = () => {
 
     return (
         <div>
-            <h2>Add Products</h2>
+            
             <div>
-                <form onSubmit={handleSubmit}>
-                    <input
-                        type="text"
-                        placeholder="Enter product name"
-                        value={formData.p_name}
-                        onChange={(e) => isValidName(e.target.value)}
-                        required
-                    />
+                <form onSubmit={handleSubmit} className="container ">
+                    <h2 className="form-title">Add Products</h2>
+                    <div className="form-group">
+                        <label htmlFor="Name">Name :</label>
+                        <input
+                            type="text"
+                            placeholder="Enter product name"
+                            value={formData.p_name}
+                            onChange={(e) => isValidName(e.target.value)}
+                            required
+                        />
+                    </div>
+                    
+                    <div className="form-group">
+                        <label htmlFor="quantity ">Quantity :</label>
 
-                    <input
-                        type="number"
-                        min="0"
-                        step="1"
-                        placeholder="Enter quantity"
-                        value={formData.quantity}
-                        onChange={(e) => isValidQuantity(e.target.value)}
-                        required
-                    />
+                        <input
+                            type="number"
+                            min="0"
+                            step="1"
+                            placeholder="Enter quantity"
+                            value={formData.quantity}
+                            onChange={(e) => isValidQuantity(e.target.value)}
+                            required
+                            className=""
+                        />
+                    </div>
+                    <div className="form-group">
+                        <label htmlFor="price">Price :</label>
+                        <input
+                            type="number"
+                            min="0"
+                            step="0.01"
+                            placeholder="Enter price"
+                            value={formData.price}
+                            onChange={(e) => isValidPrice(e.target.value)}
+                            required
+                        />
+                    </div>
+                   <div className="form-group">
+                        <label htmlFor="min_stock_level">Minimal_Stock_level :</label>
 
-                    <input
-                        type="number"
-                        min="0"
-                        step="0.01"
-                        placeholder="Enter price"
-                        value={formData.price}
-                        onChange={(e) => isValidPrice(e.target.value)}
-                        required
-                    />
+                        <input
+                            type="number"
+                            min="0"
+                            step="1"
+                            placeholder="Enter minimum stock level"
+                            value={formData.min_stock_level}
+                            onChange={(e) => isValidStock(e.target.value)}
+                            required
+                        />
+                   </div>
+                    <div className="form-group">
+                        <label htmlFor="category">Category :</label>
+                        <select
+                            value={select_c_id}
+                            onChange={(e) => setSelect_C_id(e.target.value)}
+                            required
+                        >
+                            <option value="">Select category</option>
 
-                    <input
-                        type="number"
-                        min="0"
-                        step="1"
-                        placeholder="Enter minimum stock level"
-                        value={formData.min_stock_level}
-                        onChange={(e) => isValidStock(e.target.value)}
-                        required
-                    />
+                            {categories.map((category) => (
+                                <option key={category.c_id} value={category.c_id}>
+                                    {category.c_name}
+                                </option>
+                            ))}
+                        </select>
 
-                    <select
-                        value={select_c_id}
-                        onChange={(e) => setSelect_C_id(e.target.value)}
-                        required
-                    >
-                        <option value="">Select category</option>
-
-                        {categories.map((category) => (
-                            <option key={category.c_id} value={category.c_id}>
-                                {category.c_name}
-                            </option>
-                        ))}
-                    </select>
-
+                    </div>
                     {error && <p style={{ color: "red" }}>{error}</p>}
                     {success && <p style={{ color: "green" }}>{success}</p>}
 
@@ -221,37 +237,39 @@ export const Products = () => {
                 </form>
             </div>
 
-            <div>
-                <h2>List Of Products</h2>
-                <table>
+            <div className="products-section">
+                <h2 className="products-title">List Of Products</h2>
+                <div className="table-wrapper">
+                    <table className="products-table">
 
-
-                    <thead>
-                        <tr>
-                            <th>ID</th>
-                            <th>Name</th>
-                            <th>Quantity</th>
-                            <th>Price</th>
-                            <th>Minimum Stock Level</th>
-                            <th>Category ID</th>
-                            <th> C_name</th>
-                        </tr>
-                    </thead>
-
-                    <tbody>
-                        {listProducts.map((prod) => (
-                            <tr key={prod.p_id}>
-                                <td>{prod.p_id}</td>
-                                <td>{prod.p_name}</td>
-                                <td>{prod.quantity}</td>
-                                <td>{prod.price}</td>
-                                <td>{prod.min_stock_level}</td>
-                                <td>{prod.c_id}</td>
-                                <td> {prod.category.c_name}</td>
+                        <thead>
+                            <tr>
+                                <th>ID</th>
+                                <th>Name</th>
+                                <th>Quantity</th>
+                                <th>Price</th>
+                                <th>Minimum Stock Level</th>
+                                <th>Category ID</th>
+                                <th> C_name</th>
                             </tr>
-                        ))}
-                    </tbody>
-                </table>
+                        </thead>
+
+                        <tbody>
+                            {listProducts.map((prod) => (
+                                <tr key={prod.p_id}>
+                                    <td>{prod.p_id}</td>
+                                    <td>{prod.p_name}</td>
+                                    <td>{prod.quantity}</td>
+                                    <td>{prod.price}</td>
+                                    <td>{prod.min_stock_level}</td>
+                                    <td>{prod.c_id}</td>
+                                    <td> {prod.category.c_name}</td>
+                                </tr>
+                            ))}
+                        </tbody>
+                    </table>
+                </div>
+                
             </div>
 
 
